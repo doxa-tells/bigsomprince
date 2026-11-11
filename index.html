@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сколько баксов: концепт клипа</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: four full-screen slides, one visual world: a dark smoky room, paper-white type, banknote-green ink for timecodes and marks. */
+:root {
+  --ink: #0c0b09;          /* room darkness */
+  --ink-2: #16140f;        /* raised surface */
+  --paper: #efe9db;        /* banknote paper, main text */
+  --dim: #a39c8c;          /* secondary text */
+  --green: #9cba8f;        /* dollar-ink green, the one accent */
+  --line: rgba(239, 233, 219, 0.14);
+  --display: "Dela Gothic One", "Arial Black", Impact, sans-serif;
+  --body: "Golos Text", "Segoe UI", Roboto, Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-snap-type: y proximity; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 400; }
+p { margin: 0; }
+img, video { max-width: 100%; display: block; }
+a { color: var(--green); }
+a:focus-visible, button:focus-visible, video:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+
+.slide {
+  position: relative;
+  min-height: 100svh;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(72px, 9vh, 120px) clamp(20px, 6vw, 96px);
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+.slide:first-child { border-top: 0; }
+.bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  z-index: 0;
+}
+.bg::after { content: ""; position: absolute; inset: 0; }
+.inner { position: relative; z-index: 1; width: 100%; max-width: 1180px; margin: 0 auto; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  display: flex; gap: 14px; align-items: center;
+}
+.eyebrow .n { color: var(--dim); }
+.tc { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--green); font-size: 13px; letter-spacing: 0.04em; }
+
+/* ---------- 01 hero ---------- */
+#hero { text-align: center; }
+#hero .bg { background-image: url("hero.jpg"); filter: saturate(0.85); }
+#hero .bg::after {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(12,11,9,0.2) 0%, rgba(12,11,9,0.55) 70%, rgba(12,11,9,0.85) 100%),
+    linear-gradient(to bottom, rgba(12,11,9,0.45), rgba(12,11,9,0.1) 40%, rgba(12,11,9,0.85));
+}
+#hero .inner { display: flex; flex-direction: column; align-items: center; gap: 22px; }
+#hero .kicker { font-family: var(--mono); font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--paper); opacity: 0.85; }
+#hero h1 {
+  font-family: var(--display);
+  font-size: clamp(54px, 11.5vw, 168px);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+}
+#hero h1 .q { color: var(--green); }
+#hero .artists { font-family: var(--body); font-weight: 600; font-size: clamp(18px, 2.2vw, 26px); letter-spacing: 0.06em; }
+#hero .artists span { color: var(--dim); font-weight: 400; padding: 0 0.5em; }
+.specs {
+  position: absolute; left: 0; right: 0; bottom: 34px; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);
+  padding: 0 20px;
+}
+.specs b { color: var(--paper); font-weight: 500; }
+.shot-logo { width: 96px; height: auto; opacity: 0.95; }
+
+/* ---------- 02 idea ---------- */
+#idea .bg { background-image: url("casino.jpg"); filter: saturate(0.7); }
+#idea .bg::after { background: linear-gradient(90deg, rgba(12,11,9,0.97) 0%, rgba(12,11,9,0.9) 48%, rgba(12,11,9,0.62) 100%); }
+.idea-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: start; margin-top: 28px; }
+.quote {
+  font-family: var(--display);
+  font-size: clamp(30px, 4.2vw, 56px);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.quote em { font-style: normal; color: var(--green); }
+.lead { margin-top: 24px; max-width: 58ch; color: var(--paper); font-size: 18px; }
+.key {
+  margin-top: 26px; max-width: 58ch;
+  padding: 18px 20px;
+  border-left: 3px solid var(--green);
+  background: rgba(156, 186, 143, 0.07);
+}
+.key h3 { font-weight: 600; font-size: 17px; margin-bottom: 6px; }
+.key p { color: var(--dim); }
+.key .tc { margin-right: 4px; }
+.lines { display: grid; gap: 14px; }
+.line {
+  display: grid; grid-template-columns: 112px 1fr; gap: 16px;
+  padding: 16px 0; border-top: 1px solid var(--line);
+}
+.line:first-child { border-top: 0; padding-top: 0; }
+.line h3 { font-family: var(--display); font-size: 18px; text-transform: uppercase; line-height: 1.2; }
+.line p { color: var(--dim); font-size: 16px; }
+.line.final h3 { color: var(--green); }
+
+/* ---------- 03 shots ---------- */
+#shots { background: var(--ink-2); }
+.slide-head { display: flex; flex-direction: column; gap: 14px; margin-bottom: 34px; }
+.slide-head h2 { font-family: var(--display); font-size: clamp(34px, 5vw, 64px); text-transform: uppercase; line-height: 1; }
+.slide-head p { color: var(--dim); max-width: 60ch; }
+.shots {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line);
+}
+.shot {
+  padding: 20px 22px 22px;
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 8px;
+}
+.shot h3 { font-weight: 600; font-size: 17px; line-height: 1.3; }
+.shot p { color: var(--dim); font-size: 15px; line-height: 1.5; }
+.shot.core { background: rgba(156, 186, 143, 0.08); }
+.shot.core h3 { color: var(--green); }
+.hybrid { margin-top: 26px; max-width: 70ch; color: var(--dim); }
+.hybrid b { color: var(--paper); font-weight: 600; }
+
+/* ---------- 04 riba + iphone ---------- */
+.riba-grid { display: grid; grid-template-columns: 1.45fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start; }
+.player { position: relative; }
+.player video { width: 100%; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line); }
+.player .cap { display: flex; justify-content: space-between; gap: 12px; margin-top: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+.iphone h3.t { font-family: var(--display); font-size: 22px; text-transform: uppercase; margin-bottom: 4px; }
+.iphone .sub { color: var(--dim); margin-bottom: 18px; }
+.iphone ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: r; }
+.iphone li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; counter-increment: r; }
+.iphone li::before { content: counter(r, decimal-leading-zero); font-family: var(--mono); font-size: 13px; color: var(--green); padding-top: 2px; }
+.iphone li b { display: block; font-weight: 600; }
+.iphone li span { color: var(--dim); font-size: 15px; }
+.iphone h3.t { margin-bottom: 18px; }
+.example { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; font-weight: 600; }
+.foot { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
+
+/* ---------- slide counter ---------- */
+.pager {
+  position: fixed; right: clamp(12px, 2vw, 28px); top: 50%; transform: translateY(-50%);
+  z-index: 10; display: flex; flex-direction: column; gap: 10px;
+}
+.pager a {
+  display: block; width: 34px; text-align: right;
+  font-family: var(--mono); font-size: 11px; color: var(--dim); text-decoration: none; letter-spacing: 0.06em;
+  padding: 2px 0;
+}
+.pager a.on { color: var(--green); }
+.pager a.on::after { content: " —"; }
+
+/* entrance: visible at rest, a short rise only when motion is allowed */
+@media (prefers-reduced-motion: no-preference) {
+  #hero .inner > * { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) both; }
+  #hero .inner > *:nth-child(2) { animation-delay: 0.08s; }
+  #hero .inner > *:nth-child(3) { animation-delay: 0.16s; }
+  @keyframes rise { from { transform: translateY(14px); } to { transform: none; } }
+}
+
+@media (max-width: 960px) {
+  .idea-grid, .riba-grid { grid-template-columns: 1fr; }
+  .shots { grid-template-columns: repeat(2, 1fr); }
+  .pager { display: none; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .shots { grid-template-columns: 1fr; }
+  .line { grid-template-columns: 1fr; gap: 6px; }
+  .specs { position: static; margin-top: 40px; }
+  #hero { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="pager" aria-label="Слайды">
+  <a href="#hero" class="on">01</a>
+  <a href="#idea">02</a>
+  <a href="#shots">03</a>
+  <a href="#riba">04</a>
+</nav>
+
+<!-- 01 -->
+<section class="slide" id="hero">
+  <div class="bg" role="img" aria-label="Двое подростков читают рэп в комнате с постерами"></div>
+  <div class="inner">
+    <div class="kicker">Концепт и сценарий</div>
+    <h1>Сколько баксов<span class="q">?</span></h1>
+    <div class="artists">Big Som<span>×</span>V $ X V PRiNCE</div>
+  </div>
+  <div class="specs">
+    <div>Гибрид <b>живой съёмки и ИИ</b></div>
+    <img class="shot-logo" src="shot-on-iphone.svg" alt="Shot on iPhone" width="96" height="85">
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="slide" id="idea">
+  <div class="bg" role="img" aria-label="Двое за покерным столом"></div>
+  <div class="inner">
+    <div class="eyebrow"><span class="n">02</span>Задумка</div>
+    <div class="idea-grid">
+      <div>
+        <p class="quote">Сколько тебе надо, чтобы ты <em>не продавался?</em></p>
+        <p class="lead">Клип про двух артистов, которые подростками мечтали о деньгах, дошли до них и не продались. На этом вопросе из хука держится весь смысл.</p>
+        <div class="key">
+          <h3>Образ-ключ: деньги падают с неба, толпа дерётся за них</h3>
+          <p>Кадр открывает клип и возвращается трижды. На <span class="tc">1:05</span> все снова хватают купюры, а Big Som стоит неподвижно и не тянет руку. Это ответ на вопрос песни без слов.</p>
+        </div>
+      </div>
+      <div class="lines">
+        <div class="line">
+          <h3>Прошлое</h3>
+          <p>Подростки Принц и Бигсом в комнате с рэп-постерами: считают мелочь, играют машинкой, слушают пластинки. Отсюда всё началось.</p>
+        </div>
+        <div class="line">
+          <h3>Настоящее</h3>
+          <p>Порш, джет над Алматы, казино, молл, флаг Казахстана. То, о чём мечтали.</p>
+        </div>
+        <div class="line">
+          <h3>Система</h3>
+          <p>Толпа одинаковых людей и холодная камера: «Астана — морозильник». Big Som один поднимает голову: «принципы выше системной трясины».</p>
+        </div>
+        <div class="line final">
+          <h3>Финал</h3>
+          <p>Тёмный чердак, свет из люка, отсылка к Ms. Jackson. В луче на них сыплются деньги, но они не тянутся, просто смотрят вверх с лёгкой улыбкой. Их уже не купить.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="slide" id="shots">
+  <div class="inner">
+    <div class="slide-head">
+      <div class="eyebrow"><span class="n">03</span>Почему такие кадры</div>
+      <h2>Каждый образ взят из текста</h2>
+      <p>Каждая сцена либо иллюстрирует строчку песни, либо отвечает на её главный вопрос. Таймкоды указаны по треку.</p>
+    </div>
+    <div class="shots">
+      <div class="shot">
+        <span class="tc">0:00 · 2:26</span>
+        <h3>Денежный дождь и толпа</h3>
+        <p>Вопрос «Сколько баксов?» в одной картинке. С каждым повтором меняется отношение героев к деньгам.</p>
+      </div>
+      <div class="shot">
+        <span class="tc">0:16 · 2:00</span>
+        <h3>Подростки в комнате</h3>
+        <p>2003 год, первый текст, старое худи. Благодаря этим сценам флекс выглядит как путь, а не как хвастовство.</p>
+      </div>
+      <div class="shot">
+        <span class="tc">0:26 · 1:24 · 2:02</span>
+        <h3>Порш, молл, джет</h3>
+        <p>Сбывшаяся мечта тех самых пацанов. Джет нарочно стоит на куплете про отключённый свет: мы слышим, откуда они пришли, и видим, где они сейчас.</p>
+      </div>
+      <div class="shot">
+        <span class="tc">0:34</span>
+        <h3>Казино</h3>
+        <p>Мир «папиных дочек и маминых сыночков». Дипломы, должности и дорога без кочек достаются им даром.</p>
+      </div>
+      <div class="shot">
+        <span class="tc">0:44</span>
+        <h3>Толпа одинаковых</h3>
+        <p>Это «системная трясина». Все опустили головы, Бигсом один поднимает свою.</p>
+      </div>
+      <div class="shot">
+        <span class="tc">0:54</span>
+        <h3>Холодильная камера</h3>
+        <p>Буквально «Астана — морозильник». В холодной системе выживает тот, кто с шипами, как зимняя резина.</p>
+      </div>
+      <div class="shot core">
+        <span class="tc">1:05</span>
+        <h3>Бигсом не хватает деньги</h3>
+        <p>Центр клипа. «Сколько тебе надо, чтобы ты не продавался?» Вокруг все хватают, он стоит.</p>
+      </div>
+      <div class="shot">
+        <span class="tc">1:12 · 2:02</span>
+        <h3>Флаг и Кок-Тобе</h3>
+        <p>Это наш местный флекс. Клип про наши города и наших людей, а не копия американского рэпа.</p>
+      </div>
+      <div class="shot">
+        <span class="tc">1:40</span>
+        <h3>Принц среди своих</h3>
+        <p>Семья, старшие, пацаны с района. Это не покупается, и ради этого не продаются.</p>
+      </div>
+    </div>
+    <p class="hybrid"><b>Гибрид живой съёмки и ИИ.</b> Артисты и люди в кадре настоящие, а ИИ добавляет масштаб и то, что невозможно снять камерой. Реальность плюс мечта, как в самой песне.</p>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="slide" id="riba">
+  <div class="inner">
+    <div class="slide-head">
+      <div class="eyebrow"><span class="n">04</span>Рыба</div>
+      <h2>Монтажный макет</h2>
+    </div>
+    <div class="riba-grid">
+      <div class="player">
+        <video id="riba-video" controls preload="metadata" playsinline poster="casino.jpg">
+          <source src="riba.mp4" type="video/mp4">
+          Видео не загрузилось. Обновите страницу.
+        </video>
+        <div class="cap"><span>Концепт по референсам</span><span>3:12</span></div>
+      </div>
+      <div class="iphone">
+        <h3 class="t">Почему снимаем на iPhone</h3>
+        <ol>
+          <li><div><b>Сейчас в тренде</b><span>Клипы на айфон снимает всё больше артистов, и зрителям это интересно.</span></div></li>
+          <li><div><b>Дополнительные просмотры</b><span>«Снято на iPhone» само по себе инфоповод: клипом делятся и обсуждают его и по этой причине.</span></div></li>
+          <li><div><b>Качество не хуже профессиональной камеры</b><span>ProRes RAW и Apple Log 2: после цветокоррекции разницу с кинокамерой не заметить.</span></div></li>
+        </ol>
+        <p class="example"><span class="tc">Пример</span>«Династия», VILLIAN &amp; madk1d</p>
+      </div>
+    </div>
+    <div class="foot"><span>«Сколько баксов» · Big Som × V $ X V PRiNCE</span><span>Концепт · 2026</span></div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var links = document.querySelectorAll('.pager a');
+  var slides = document.querySelectorAll('.slide');
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); });
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach(function (s) { io.observe(s); });
+})();
+</script>
+</body>
+</html>
